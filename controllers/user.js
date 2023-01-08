@@ -24,7 +24,7 @@ const createUserHandler = async (req, res) => {
 
   return res.send({
     status: typeof userOrError !== "string" ? "OK" : "Error",
-    data: userOrError,
+    user: userOrError,
   });
 };
 
@@ -40,7 +40,7 @@ const loginHandler = async (req, res) => {
 
   return res.send({
     status: typeof userOrError !== "string" ? "OK" : "Error",
-    data: userOrError,
+    user: userOrError,
   });
 };
 
@@ -55,7 +55,7 @@ const getUserHandler = async (req, res) => {
   const userOrError = await getUserById({ id });
   return res.send({
     status: typeof userOrError !== "string" ? "OK" : "Error",
-    message: userOrError,
+    user: userOrError,
   });
 };
 
@@ -77,7 +77,7 @@ const updateHandler = async (req, res) => {
 
   return res.send({
     status: typeof userOrError !== "string" ? "OK" : "Error",
-    message: userOrError,
+    user: userOrError,
   });
 };
 
