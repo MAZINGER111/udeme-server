@@ -43,7 +43,7 @@ const updateCategory = async ({ id, newData }) => {
 const deleteCategory = async ({ id }) => {
   if (!id || id.length !== 24) return "Category not found";
 
-  const deletedData = await User.deleteOne({ _id: id });
+  const deletedData = await Category.deleteOne({ _id: id });
   return deletedData.deletedCount;
 };
 

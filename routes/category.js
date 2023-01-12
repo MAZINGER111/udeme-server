@@ -9,7 +9,7 @@ const {
 const router = Router();
 
 router.get("/", getAllCategoriesHandler);
-router.get("/account/:id", getCategoryHandler);
+router.get("/:id", getCategoryHandler);
 router.post("/create", createCategoryHandler);
 router.put("/update/:id", updateHandler);
 router.delete("/delete/:id", deleteCategoryHandler);
