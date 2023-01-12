@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-commentSchema = new mongoose.Schema(
+const commentSchema = new mongoose.Schema(
   {
     by: { type: String, required: true },
     body: { type: String, required: true },
-    likes: { type: Number, required: true },
+    likes: { type: Number },
     postId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

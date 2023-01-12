@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-discussionSchema = new mongoose.Schema(
+const discussionSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     featuredImage: { type: String, required: true },
