@@ -24,6 +24,7 @@ const blogRoutes = require("./routes/blog");
 const commentRoutes = require("./routes/comment");
 const reportRoutes = require("./routes/report");
 const categoryRoutes = require("./routes/category");
+const resourcesRoutes = require("./routes/resource");
 
 app.use("/projects", projectsRoutes);
 app.use("/blog", blogRoutes);
@@ -31,6 +32,7 @@ app.use("/users", userRoutes);
 app.use("/comments", commentRoutes);
 app.use("/reports", reportRoutes);
 app.use("/category", categoryRoutes);
+app.use("/resources", resourcesRoutes);
 
 app.get("/", (req, res) => {
   return res.json({ message: "Hi, I am Udeme's server" });
