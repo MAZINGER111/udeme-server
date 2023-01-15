@@ -31,8 +31,8 @@ const createReport = async ({
   report.state = state;
   report.address = address;
   report.lga = lga;
+  report.desc = desc;
   report.submittedBy = submittedBy;
-
   const reportInstance = await report.save();
 
   if (!reportInstance) return "Error creating report";

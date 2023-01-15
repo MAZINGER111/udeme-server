@@ -44,7 +44,6 @@ const createReportHandler = async (req, res) => {
     address,
     lga,
     desc,
-
     submittedBy,
   };
 
