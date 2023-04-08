@@ -12,14 +12,14 @@ const getAllResourcesHandler = async (req, res) => {
 };
 
 const createResourceHandler = async (req, res) => {
-  const { name, category, url } = req.body;
+  const { name, date, localState, url } = req.body;
 
-  if (!name || !category || !url)
+  if (!name || !date || !localState || !url)
     return res
       .status(406)
       .send({ status: "Error", message: "Empty or incomplete input" });
 
-  const resourceOrError = await createResource({ name, category, url });
+  const resourceOrError = await createResource({ name, date, localState, url });
 
   return res.send({
     status: typeof resourceOrError !== "string" ? "OK" : "Error",

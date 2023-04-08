@@ -1,11 +1,12 @@
 const { Resource } = require("../models/resource");
 
-const createResource = async ({ name, category, url }) => {
-  if (!name || !category || !url) return;
+const createResource = async ({ name, date, localState, url }) => {
+  if (!name || !date || !localState || !url) return;
 
   const resource = new Resource();
   resource.name = name;
-  resource.category = category;
+  resource.date = date;
+  resource.localState = localState;
   resource.url = url;
 
   const resourceInstace = await resource.save();
