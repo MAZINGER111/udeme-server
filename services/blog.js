@@ -18,10 +18,14 @@ const createBlogPost = async ({ title, featuredImage, createdBy, body }) => {
   return blogInstace;
 };
 
-const getAllBlogPosts = async () => {
-  const allBlogPosts = await Blog.find({});
+const getAllBlogPosts = async (page, postPerPage) => {
+  const totalCount = await Blog.estimatedDocumentCount({});
 
-  return allBlogPosts;
+  const allBlogPosts = await Blog.find({})
+    .skip((page - 1) * postPerPage)
+    .limit(postPerPage);
+
+  return { posts: allBlogPosts, totalCount };
 };
 
 const getBlogPostById = async ({ id }) => {

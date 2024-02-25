@@ -29,8 +29,21 @@ const createProjectHandler = async (req, res) => {
 };
 
 const getAllProjectsHandler = async (req, res) => {
-  const projects = await getAllProjects();
-  return res.json({ success: true, projects });
+  const page = req.query.page || 1;
+  const postPerPage = 12;
+
+  const { projects, totalCount } = await getAllProjects(page, postPerPage);
+  const pageCount = Math.floor(totalCount / postPerPage);
+
+  return res.json({
+    success: true,
+    projects,
+    pagination: {
+      totalCount,
+      pageCount,
+      currentPage: Number(page),
+    },
+  });
 };
 
 const getProjectHandler = async (req, res) => {

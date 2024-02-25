@@ -34,10 +34,14 @@ const createProject = async ({
   return projectInstace;
 };
 
-const getAllProjects = async () => {
-  const allProjects = await Project.find({});
+const getAllProjects = async (page, postPerPage) => {
+  const totalCount = await Project.estimatedDocumentCount({});
 
-  return allProjects;
+  const allProjects = await Project.find({})
+    .skip((page - 1) * postPerPage)
+    .limit(postPerPage);
+
+  return { projects: allProjects, totalCount };
 };
 
 const getProjectById = async ({ id }) => {

@@ -28,8 +28,20 @@ const createBlogPostHandler = async (req, res) => {
 };
 
 const getAllBlogPostsHandler = async (req, res) => {
-  const posts = await getAllBlogPosts();
-  return res.json({ success: true, posts });
+  const page = req.query.page || 1;
+  const postPerPage = 12;
+  const { posts, totalCount } = await getAllBlogPosts(page, postPerPage);
+  const pageCount = Math.floor(totalCount / postPerPage);
+
+  return res.json({
+    success: true,
+    posts,
+    pagination: {
+      totalCount,
+      pageCount,
+      currentPage: Number(page),
+    },
+  });
 };
 
 const getBlogPostHandler = async (req, res) => {
