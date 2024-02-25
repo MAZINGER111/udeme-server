@@ -1,6 +1,13 @@
 const { Resource } = require("../models/resource");
 
-const createResource = async ({ name, date, localState, url }) => {
+const createResource = async ({
+  name,
+  date,
+  localState,
+  url,
+  desc,
+  featuredImage,
+}) => {
   if (!name || !date || !localState || !url || !desc || !featuredImage) return;
 
   const resource = new Resource();
