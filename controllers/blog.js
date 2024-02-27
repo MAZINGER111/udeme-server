@@ -36,7 +36,7 @@ const getAllBlogPostsHandler = async (req, res) => {
     postPerPage,
     isAdmin
   );
-  const pageCount = Math.floor(totalCount / postPerPage);
+  const pageCount = Math.round(totalCount / postPerPage);
 
   return res.json({
     success: true,

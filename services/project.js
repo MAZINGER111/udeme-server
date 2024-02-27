@@ -39,9 +39,10 @@ const getAllProjects = async (page, postPerPage, isAdmin) => {
 
   let allProjects;
   if (isAdmin) {
-    allProjects = await Project.find({});
+    allProjects = await Project.find({}).sort({ createdAt: -1 });
   } else {
     allProjects = await Project.find({})
+      .sort({ createdAt: -1 })
       .skip((page - 1) * postPerPage)
       .limit(postPerPage);
   }
