@@ -18,12 +18,18 @@ const createBlogPost = async ({ title, featuredImage, createdBy, body }) => {
   return blogInstace;
 };
 
-const getAllBlogPosts = async (page, postPerPage) => {
+const getAllBlogPosts = async (page, postPerPage, isAdmin) => {
   const totalCount = await Blog.estimatedDocumentCount({});
 
-  const allBlogPosts = await Blog.find({})
-    .skip((page - 1) * postPerPage)
-    .limit(postPerPage);
+  let allBlogPosts;
+
+  if (isAdmin) {
+    allBlogPosts = await Blog.find({});
+  } else {
+    allBlogPosts = await Blog.find({})
+      .skip((page - 1) * postPerPage)
+      .limit(postPerPage);
+  }
 
   return { posts: allBlogPosts, totalCount };
 };

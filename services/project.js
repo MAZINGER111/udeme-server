@@ -34,12 +34,17 @@ const createProject = async ({
   return projectInstace;
 };
 
-const getAllProjects = async (page, postPerPage) => {
+const getAllProjects = async (page, postPerPage, isAdmin) => {
   const totalCount = await Project.estimatedDocumentCount({});
 
-  const allProjects = await Project.find({})
-    .skip((page - 1) * postPerPage)
-    .limit(postPerPage);
+  let allProjects;
+  if (isAdmin) {
+    allProjects = await Project.find({});
+  } else {
+    allProjects = await Project.find({})
+      .skip((page - 1) * postPerPage)
+      .limit(postPerPage);
+  }
 
   return { projects: allProjects, totalCount };
 };

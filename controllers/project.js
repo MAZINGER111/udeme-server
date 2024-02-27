@@ -30,9 +30,14 @@ const createProjectHandler = async (req, res) => {
 
 const getAllProjectsHandler = async (req, res) => {
   const page = req.query.page || 1;
+  const isAdmin = req.query.admin || false;
   const postPerPage = 12;
 
-  const { projects, totalCount } = await getAllProjects(page, postPerPage);
+  const { projects, totalCount } = await getAllProjects(
+    page,
+    postPerPage,
+    isAdmin
+  );
   const pageCount = Math.floor(totalCount / postPerPage);
 
   return res.json({
