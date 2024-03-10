@@ -33,6 +33,7 @@ const createReport = async ({
   report.lga = lga;
   report.desc = desc;
   report.submittedBy = submittedBy;
+
   const reportInstance = await report.save();
 
   if (!reportInstance) return "Error creating report";
@@ -49,19 +50,22 @@ const getReportById = async ({ id }) => {
   return report;
 };
 
-const approveReport = async ({ id }) => {
+const approveReport = async ({ id, newData }) => {
   if (!id || id.length !== 24) return;
-  const updatedReport = await Project.findByIdAndUpdate(
-    id,
-    { status: "approved" },
-    {
-      new: true,
-    }
-  );
+
+  // let updates = { status: "approved" };
+
+  // if (newData) {
+  //   updates = { ...updates, ...newData };
+  // }
+  const updatedReport = await Project.findByIdAndUpdate(id, updates, {
+    new: true,
+  });
 
   //   TODO: email theme to research project
   return updatedReport;
 };
+
 const rejectReport = async ({ id }) => {
   if (!id || id.length !== 24) return;
   const updatedReport = await Project.findByIdAndUpdate(
@@ -81,10 +85,19 @@ const getAllReports = async () => {
 
   return allReports;
 };
+
+const deleteReport = async ({ id }) => {
+  if (!id) return "Report not found";
+
+  const deletedData = await Report.deleteOne({ _id: id });
+
+  return deletedData.deletedCount;
+};
 module.exports = {
   createReport,
   getReportById,
   approveReport,
   rejectReport,
   getAllReports,
+  deleteReport,
 };

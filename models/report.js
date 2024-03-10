@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const reportSchema = new mongoose.Schema(
   {
@@ -7,7 +8,7 @@ const reportSchema = new mongoose.Schema(
     state: { type: String, required: true },
     address: { type: String, required: true },
     lga: { type: String, required: true },
-    desc: { type: String, required: true },
+    desc: { type: Schema.Types.Mixed, required: true },
     images: { type: [String] },
     submittedBy: {
       fullname: { type: String, required: true },

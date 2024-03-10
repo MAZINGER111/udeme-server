@@ -4,6 +4,7 @@ const {
   approveReport,
   rejectReport,
   getAllReports,
+  deleteReport,
 } = require("../services/report");
 
 const getAllReportsHandler = async (req, res) => {
@@ -76,13 +77,20 @@ const getReportHandler = async (req, res) => {
 
 const approveReportHandler = async (req, res) => {
   const { id } = req.params;
+  const newData = req.body;
 
   if (!id || id.length !== 24)
     return res
       .status(406)
       .send({ status: "Error", message: "Invalid report id" });
 
-  const reportOrError = await approveReport({ id });
+  let updates = { status: "approved" };
+
+  if (newData) {
+    updates = { ...updates, ...newData };
+  }
+
+  const reportOrError = await approveReport({ id, updates });
   return res.send({
     status: typeof reportOrError !== "string" ? "OK" : "Error",
     report: reportOrError,
@@ -104,10 +112,26 @@ const rejectReportHandler = async (req, res) => {
   });
 };
 
+const deleteReportHandler = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id || id.length !== 24)
+    return res
+      .status(406)
+      .send({ status: "Error", message: "Invalid report id" });
+
+  const deteledInstance = await deleteReport({ id });
+  return res.send({
+    status: deteledInstance !== 1 ? "Error" : "OK",
+    message: deteledInstance !== 1 ? "Report not found" : "Report deleted",
+  });
+};
+
 module.exports = {
   createReportHandler,
   getReportHandler,
   approveReportHandler,
   rejectReportHandler,
   getAllReportsHandler,
+  deleteReportHandler,
 };
