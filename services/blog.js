@@ -24,7 +24,7 @@ const getAllBlogPosts = async (page, postPerPage, isAdmin) => {
   let allBlogPosts;
 
   if (isAdmin) {
-    allBlogPosts = await Blog.find({}).sort({ createdAt: -1 });
+    allBlogPosts = await Blog.find({});
   } else {
     allBlogPosts = await Blog.find({})
       .sort({ createdAt: -1 })

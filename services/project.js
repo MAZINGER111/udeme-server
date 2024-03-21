@@ -8,8 +8,10 @@ const createProject = async ({
   type,
   createdBy,
   body,
+  states,
 }) => {
-  if (!title || !featuredImage || !type || !createdBy || !body) return;
+  if (!title || !featuredImage || !type || !createdBy || !body || !states)
+    return;
 
   const project = new Project();
   project.title = title;
@@ -17,6 +19,7 @@ const createProject = async ({
   project.body = body;
   project.type = type;
   project.createdBy = createdBy;
+  project.states = states;
 
   const projectInstace = await project.save();
 
@@ -39,7 +42,7 @@ const getAllProjects = async (page, postPerPage, isAdmin) => {
 
   let allProjects;
   if (isAdmin) {
-    allProjects = await Project.find({}).sort({ createdAt: -1 });
+    allProjects = await Project.find({});
   } else {
     allProjects = await Project.find({})
       .sort({ createdAt: -1 })

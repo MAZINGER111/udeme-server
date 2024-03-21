@@ -7,6 +7,7 @@ const ProjectSchema = new mongoose.Schema(
     type: { type: String, required: true },
     createdBy: { type: String, required: true },
     body: { type: String, required: true },
+    states: { type: [String], required: true },
   },
   { timestamps: true }
 );

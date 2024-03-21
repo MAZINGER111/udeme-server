@@ -15,6 +15,6 @@ router.get("/report/:id", getReportHandler);
 router.post("/create", createReportHandler);
 router.put("/aprove/:id", approveReportHandler);
 router.put("/reject/:id", rejectReportHandler);
-router.delete("/report/:id", rejectReportHandler);
+router.delete("/report/:id", deleteReportHandler);
 
 module.exports = router;

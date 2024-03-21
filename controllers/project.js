@@ -26,6 +26,7 @@ const createProjectHandler = async (req, res) => {
     type,
     createdBy,
     body,
+    states,
   });
 
   const subscribers = await getSubscribersByStates({ states });

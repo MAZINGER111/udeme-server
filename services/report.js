@@ -58,7 +58,7 @@ const approveReport = async ({ id, newData }) => {
   // if (newData) {
   //   updates = { ...updates, ...newData };
   // }
-  const updatedReport = await Project.findByIdAndUpdate(id, updates, {
+  const updatedReport = await Report.findByIdAndUpdate(id, updates, {
     new: true,
   });
 
@@ -68,7 +68,7 @@ const approveReport = async ({ id, newData }) => {
 
 const rejectReport = async ({ id }) => {
   if (!id || id.length !== 24) return;
-  const updatedReport = await Project.findByIdAndUpdate(
+  const updatedReport = await Report.findByIdAndUpdate(
     id,
     { status: "rejected" },
     {
